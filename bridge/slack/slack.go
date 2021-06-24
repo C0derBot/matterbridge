@@ -156,7 +156,7 @@ func (b *Bslack) JoinChannel(channel config.ChannelInfo) error {
 
 	// try to join a channel when in legacy
 	if b.legacy {
-		_, err := b.sc.JoinChannel(channel.Name)
+		_, _, _, err := b.sc.JoinConversation(channel.Name)
 		if err != nil {
 			switch err.Error() {
 			case "name_taken", "restricted_action":
@@ -195,7 +195,7 @@ func (b *Bslack) Send(msg config.Message) (string, error) {
 		b.Log.Debugf("=> Receiving %#v", msg)
 	}
 
-	msg.Text = helper.ClipMessage(msg.Text, messageLength)
+	msg.Text = helper.ClipMessage(msg.Text, messageLength, b.GetString("MessageClipped"))
 	msg.Text = b.replaceCodeFence(msg.Text)
 
 	// Make a action /me of the message

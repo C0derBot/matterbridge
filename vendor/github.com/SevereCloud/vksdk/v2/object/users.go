@@ -1,6 +1,8 @@
 package object // import "github.com/SevereCloud/vksdk/v2/object"
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -67,6 +69,7 @@ type UsersUser struct {
 	CanSeeAudio            BaseBoolInt           `json:"can_see_audio"`
 	CanWritePrivateMessage BaseBoolInt           `json:"can_write_private_message"`
 	CanSendFriendRequest   BaseBoolInt           `json:"can_send_friend_request"`
+	CanCallFromGroup       BaseBoolInt           `json:"can_call_from_group"`
 	Verified               BaseBoolInt           `json:"verified"`
 	Trending               BaseBoolInt           `json:"trending"`
 	Blacklisted            BaseBoolInt           `json:"blacklisted"`
@@ -231,6 +234,28 @@ type UsersPersonal struct {
 	Religion   string   `json:"religion"`    // User's religion
 	Smoking    int      `json:"smoking"`     // User's views on smoking
 	ReligionID int      `json:"religion_id"`
+}
+
+// UnmarshalJSON UsersPersonal.
+//
+// BUG(VK): UsersPersonal return [].
+func (personal *UsersPersonal) UnmarshalJSON(data []byte) error {
+	if bytes.Equal(data, []byte("[]")) {
+		return nil
+	}
+
+	type renamedUsersPersonal UsersPersonal
+
+	var r renamedUsersPersonal
+
+	err := json.Unmarshal(data, &r)
+	if err != nil {
+		return err
+	}
+
+	*personal = UsersPersonal(r)
+
+	return nil
 }
 
 // UsersRelative struct.

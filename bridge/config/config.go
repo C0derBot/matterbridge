@@ -85,27 +85,28 @@ type ChannelMember struct {
 type ChannelMembers []ChannelMember
 
 type Protocol struct {
-	AuthCode               string // steam
-	BindAddress            string // mattermost, slack // DEPRECATED
-	Buffer                 int    // api
-	Charset                string // irc
-	ClientID               string // msteams
-	ColorNicks             bool   // only irc for now
-	Debug                  bool   // general
-	DebugLevel             int    // only for irc now
-	DisableWebPagePreview  bool   // telegram
-	EditSuffix             string // mattermost, slack, discord, telegram, gitter
-	EditDisable            bool   // mattermost, slack, discord, telegram, gitter
-	HTMLDisable            bool   // matrix
-	IconURL                string // mattermost, slack
-	IgnoreFailureOnStart   bool   // general
-	IgnoreNicks            string // all protocols
-	IgnoreMessages         string // all protocols
-	Jid                    string // xmpp
-	JoinDelay              string // all protocols
-	Label                  string // all protocols
-	Login                  string // mattermost, matrix
-	LogFile                string // general
+	AllowMention           []string // discord
+	AuthCode               string   // steam
+	BindAddress            string   // mattermost, slack // DEPRECATED
+	Buffer                 int      // api
+	Charset                string   // irc
+	ClientID               string   // msteams
+	ColorNicks             bool     // only irc for now
+	Debug                  bool     // general
+	DebugLevel             int      // only for irc now
+	DisableWebPagePreview  bool     // telegram
+	EditSuffix             string   // mattermost, slack, discord, telegram, gitter
+	EditDisable            bool     // mattermost, slack, discord, telegram, gitter
+	HTMLDisable            bool     // matrix
+	IconURL                string   // mattermost, slack
+	IgnoreFailureOnStart   bool     // general
+	IgnoreNicks            string   // all protocols
+	IgnoreMessages         string   // all protocols
+	Jid                    string   // xmpp
+	JoinDelay              string   // all protocols
+	Label                  string   // all protocols
+	Login                  string   // mattermost, matrix
+	LogFile                string   // general
 	MediaDownloadBlackList []string
 	MediaDownloadPath      string // Basically MediaServerUpload, but instead of uploading it, just write it to a file on the same server.
 	MediaDownloadSize      int    // all protocols
@@ -119,6 +120,7 @@ type Protocol struct {
 	MessageQueue           int        // IRC, size of message queue for flood control
 	MessageSplit           bool       // IRC, split long messages with newlines on MessageLength instead of clipping
 	Muc                    string     // xmpp
+	MxID                   string     // matrix
 	Name                   string     // all protocols
 	Nick                   string     // all protocols
 	NickFormatter          string     // mattermost, slack
@@ -141,7 +143,7 @@ type Protocol struct {
 	ReplaceNicks           [][]string // all protocols
 	RemoteNickFormat       string     // all protocols
 	RunCommands            []string   // IRC
-	Server                 string     // IRC,mattermost,XMPP,discord
+	Server                 string     // IRC,mattermost,XMPP,discord,matrix
 	SessionFile            string     // msteams,whatsapp
 	ShowJoinPart           bool       // all protocols
 	ShowTopicChange        bool       // slack
@@ -156,7 +158,7 @@ type Protocol struct {
 	Team                   string     // mattermost, keybase
 	TeamID                 string     // msteams
 	TenantID               string     // msteams
-	Token                  string     // gitter, slack, discord, api
+	Token                  string     // gitter, slack, discord, api, matrix
 	Topic                  string     // zulip
 	URL                    string     // mattermost, slack // DEPRECATED
 	UseAPI                 bool       // mattermost, slack

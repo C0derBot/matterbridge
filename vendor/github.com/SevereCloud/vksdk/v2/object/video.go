@@ -35,7 +35,7 @@ type VideoVideo struct {
 	IsPrivate         BaseBoolInt       `json:"is_private"`
 	Added             BaseBoolInt       `json:"added"`
 	Repeat            BaseBoolInt       `json:"repeat"` // Information whether the video is repeated
-	ContentRestricted BaseBoolInt       `json:"content_restricted"`
+	ContentRestricted int               `json:"content_restricted"`
 	Live              BaseBoolInt       `json:"live"` // Returns if the video is a live stream
 	Upcoming          BaseBoolInt       `json:"upcoming"`
 	Comments          int               `json:"comments"`    // Number of comments
@@ -81,14 +81,15 @@ func (video VideoVideo) ToAttachment() string {
 
 // VideoRestriction struct.
 type VideoRestriction struct {
-	Title       string      `json:"title"`
-	Text        string      `json:"text"`
-	AlwaysShown BaseBoolInt `json:"always_shown"`
-	Blur        BaseBoolInt `json:"blur"`
-	CanPlay     BaseBoolInt `json:"can_play"`
-	CanPreview  BaseBoolInt `json:"can_preview"`
-	CardIcon    []BaseImage `json:"card_icon"`
-	ListIcon    []BaseImage `json:"list_icon"`
+	Title          string      `json:"title"`
+	Text           string      `json:"text"`
+	AlwaysShown    BaseBoolInt `json:"always_shown"`
+	Blur           BaseBoolInt `json:"blur"`
+	CanPlay        BaseBoolInt `json:"can_play"`
+	CanPreview     BaseBoolInt `json:"can_preview"`
+	CardIcon       []BaseImage `json:"card_icon"`
+	ListIcon       []BaseImage `json:"list_icon"`
+	DisclaimerType int         `json:"disclaimer_type"`
 }
 
 // VideoActionButton struct.
@@ -113,6 +114,8 @@ type VideoSnippet struct {
 type VideoVideoFiles struct {
 	External string `json:"external"` // URL of the external player
 	Mp4_1080 string `json:"mp4_1080"` // URL of the mpeg4 file with 1080p quality
+	Mp4_1440 string `json:"mp4_1440"` // URL of the mpeg4 file with 2k quality
+	Mp4_2160 string `json:"mp4_2160"` // URL of the mpeg4 file with 4k quality
 	Mp4_240  string `json:"mp4_240"`  // URL of the mpeg4 file with 240p quality
 	Mp4_360  string `json:"mp4_360"`  // URL of the mpeg4 file with 360p quality
 	Mp4_480  string `json:"mp4_480"`  // URL of the mpeg4 file with 480p quality
